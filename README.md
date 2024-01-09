@@ -1,3 +1,6 @@
+# Context for this repository
+This repository is a group project for **Software Engineering II** worked on by Natitack(https://github.com/natitack) and [KameronBeamer](https://github.com/KameronBeamer). In this assignment, we were given a "genuine legacy application" in the form of a repository and were tasked with implementing robust unit, controller, and feature test coverage to practice test-driven development.
+
 # Central Oregon COAD
 
 This is the GitHub repository for the Central Oregon Community Organizations Active

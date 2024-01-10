@@ -49,3 +49,5 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "net-http" # should remove warnings when running rspec, allegedly should be removed after we upgrade *something* - from stackoverflow linked in canvas

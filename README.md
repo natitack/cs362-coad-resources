@@ -34,6 +34,12 @@ Next, set up the database:
 rails db:setup
 ```
 
+```
+Set environment variables (see _.env.example_ for expectations):
+
+```
+
+
 If you want, you can create some seed data in the database:
 
 ```
@@ -97,9 +103,6 @@ Seed the rails database of a heroku app:
 
 ```
 heroku run rails db:seed --remote staging
-```
-
-Set environment variables (see _.env.example_ for expectations):
 
 ```
 heroku config:set FOO=bar

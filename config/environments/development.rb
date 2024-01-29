@@ -60,4 +60,18 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Allow requests from our preview domain.
+  pf_domain = ENV['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN']
+  config.action_dispatch.default_headers = {
+    'X-Frame-Options' => "ALLOW-FROM #{pf_domain}"
+  }
+
+  pf_host = "#{ENV['CODESPACE_NAME']}-3000.#{pf_domain}"
+  config.host = pf_host
+  #config.hosts << "localhost:3000"
+
+  config.action_cable.allowed_request_origins = ["https://#{pf_host}", "http://localhost:3000"]
+  config.action_controller.forgery_protection_origin_check = false
+  config.action_controller.default_protect_from_forgery = false
 end

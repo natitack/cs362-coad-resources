@@ -6,7 +6,7 @@ RSpec.describe Organization, type: :model do
      @organization2 = build(:organization)
 
    end
-  # test presence of associations
+  # test presence of attributes
     it "Organization has email" do
       expect(@organization1).to respond_to(:email)
     end

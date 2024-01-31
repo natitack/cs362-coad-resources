@@ -1,5 +1,5 @@
 # beej demo
-# this sequence is used in spec/factories/regions.rb
+# sequences.rb is used in all other factories.rb
 FactoryBot.define do
     sequence :name do |n|
         "fake_name_#{n}"

@@ -4,7 +4,7 @@ RSpec.describe Organization, type: :model do
    setup do
      @organization1 = build(:organization)
    end
-
+  # test presence of associations
     it "Organization has email" do
       expect(@organization1).to respond_to(:email)
     end
@@ -26,6 +26,7 @@ RSpec.describe Organization, type: :model do
     it "Organization has secondary_phone" do
         expect(@organization1).to respond_to(:secondary_phone)
     end
+    # test member functions
     it "has a string representation that is its name" do
         expect(@organization1.to_s).to eq(@organization1.name)
     end
@@ -37,5 +38,43 @@ RSpec.describe Organization, type: :model do
         @organization1.reject
         expect(@organization1.status).to eq("rejected")
     end
+    # test presence of validations
+    it "Organization validates presence of email" do
+        expect(@organization1).to validate_presence_of(:email)
+    end
+    it "Organization validates presence of name" do
+        expect(@organization1).to validate_presence_of(:name)
+    end
+    it "Organization validates presence of phone" do
+        expect(@organization1).to validate_presence_of(:phone)
+    end
+    it "Organization validates presence of status" do
+        expect(@organization1).to validate_presence_of(:status)
+    end
+    it "Organization validates presence of primary_name" do
+        expect(@organization1).to validate_presence_of(:primary_name)
+    end
+    it "Organization validates presence of secondary_name" do
+        expect(@organization1).to validate_presence_of(:secondary_name)
+    end
+    it "Organization validates presence of secondary_phone" do
+        expect(@organization1).to validate_presence_of(:secondary_phone)
+    end
+    it "Organization validates length of email" do
+        expect(@organization1).to validate_length_of(:email).is_at_least(1).is_at_most(255)
+    end
+    it "Organization validates uniqueness of email" do
+        expect(@organization1).to validate_uniqueness_of(:email).case_insensitive
+    end
+    it "Organization validates length of name" do
+        expect(@organization1).to validate_length_of(:name).is_at_least(1).is_at_most(255)
+    end
+    it "Organization validates uniqueness of name" do
+        expect(@organization1).to validate_uniqueness_of(:name).case_insensitive
+    end
+    it "Organization validates length of description" do
+        expect(@organization1).to validate_length_of(:description).is_at_most(1020)
+    end
+
 
 end

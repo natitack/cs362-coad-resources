@@ -26,6 +26,16 @@ RSpec.describe Organization, type: :model do
     it "Organization has secondary_phone" do
         expect(@organization1).to respond_to(:secondary_phone)
     end
-    
+    it "has a string representation that is its name" do
+        expect(@organization1.to_s).to eq(@organization1.name)
+    end
+    it "Organization.approve sets status to approved" do
+        @organization1.approve
+        expect(@organization1.status).to eq("approved")
+    end
+    it "Organization.reject sets status to rejected" do
+        @organization1.reject
+        expect(@organization1.status).to eq("rejected")
+    end
 
 end

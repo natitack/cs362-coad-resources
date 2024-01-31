@@ -29,9 +29,9 @@ RSpec.describe ResourceCategory, type: :model do
     it "ResourceCategory validates uniqueness of name" do
         expect(@resource_category1).to validate_uniqueness_of(:name).case_insensitive
     end
-    
+
   # Test Member Functions
-    it "ResourceCategory has a string representation that is its name" do
+    it "ResourceCategory to_s returns a string representation that is its name" do
         expect(@resource_category1.to_s).to eq(@resource_category1.name)
     end
     it "ResourceCategory.activate sets active to true" do

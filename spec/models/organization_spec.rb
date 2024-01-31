@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Organization, type: :model do
    setup do
      @organization1 = build(:organization)
+     @organization2 = build(:organization)
+
    end
   # test presence of associations
     it "Organization has email" do
@@ -37,6 +39,10 @@ RSpec.describe Organization, type: :model do
     it "Organization.reject sets status to rejected" do
         @organization1.reject
         expect(@organization1.status).to eq("rejected")
+    end
+    it "initialize sets status to submitted" do
+        expect(@organization2.status).to eq("submitted")
+        puts @organization2.errors.full_messages #command prints output of why a test using organization2 fails 
     end
     # test presence of validations
     it "Organization validates presence of email" do
@@ -75,6 +81,8 @@ RSpec.describe Organization, type: :model do
     it "Organization validates length of description" do
         expect(@organization1).to validate_length_of(:description).is_at_most(1020)
     end
-
-
+    #test presence of associations
+    it { should have_many(:users) }
+    it { should have_many(:tickets) }
+    it { should have_and_belong_to_many(:resource_categories) }
 end

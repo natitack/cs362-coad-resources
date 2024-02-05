@@ -9,6 +9,11 @@ RSpec.describe ResourceCategory, type: :model do
         @resource_category5 = build(:resource_category)
     end
 
+    # instantiation tests
+    it "exists" do
+        Region.new
+    end
+
   # Characterization tests
     it "ResourceCategory has a name" do
         expect(@resource_category1).to respond_to(:name)

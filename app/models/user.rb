@@ -1,3 +1,7 @@
+=begin
+Represents an individual.
+=end
+
 class User < ApplicationRecord
 
   enum role: [:admin, :organization]

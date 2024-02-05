@@ -6,6 +6,12 @@ RSpec.describe Organization, type: :model do
      @organization2 = build(:organization)
 
    end
+
+    # instantiation tests
+    it "exists" do
+        Region.new
+    end
+
   # test presence of attributes (characterization tests)    
     it "Organization has email" do
       expect(@organization1).to respond_to(:email)

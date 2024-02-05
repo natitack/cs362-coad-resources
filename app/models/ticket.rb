@@ -1,3 +1,7 @@
+=begin
+Represents a request for assistance.
+=end
+
 class Ticket < ApplicationRecord
 
   belongs_to :region

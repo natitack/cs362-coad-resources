@@ -1,3 +1,7 @@
+=begin
+Represents a type of item or service to be requested or provided for assistance.
+=end
+
 class ResourceCategory < ApplicationRecord
 
   has_and_belongs_to_many :organizations

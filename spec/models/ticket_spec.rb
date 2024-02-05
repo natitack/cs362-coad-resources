@@ -8,6 +8,12 @@ RSpec.describe Ticket, type: :model do
         @ticket4 = build(:ticket)
         @ticket5 = build(:ticket)
     end
+
+    # instantiation tests
+    it "exists" do
+        Region.new
+    end
+
 # Characterization tests
     it "Ticket has name" do
         expect(@ticket1).to respond_to(:name)

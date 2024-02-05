@@ -1,3 +1,7 @@
+=begin
+Represents an area for providing and request assistance in.
+=end
+
 class Region < ApplicationRecord
 
   has_many :tickets

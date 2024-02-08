@@ -11,7 +11,7 @@ RSpec.describe Ticket, type: :model do
 
     # instantiation tests
     it "exists" do
-        Region.new
+        Ticket.new
     end
 
 # Characterization tests

@@ -9,7 +9,7 @@ RSpec.describe Organization, type: :model do
 
     # instantiation tests
     it "exists" do
-        Region.new
+        Organization.new
     end
 
   # test presence of attributes (characterization tests)    

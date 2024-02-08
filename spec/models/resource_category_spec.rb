@@ -11,7 +11,7 @@ RSpec.describe ResourceCategory, type: :model do
 
     # instantiation tests
     it "exists" do
-        Region.new
+        ResourceCategory.new
     end
 
   # Characterization tests

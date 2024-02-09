@@ -19,4 +19,7 @@ RSpec.describe User, type: :model do
     expect(@user1).to respond_to(:role)
   end
 
+  # Association tests
+  it {should belong_to(:organization)}
+
 end

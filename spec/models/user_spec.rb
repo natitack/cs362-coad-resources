@@ -26,5 +26,9 @@ RSpec.describe User, type: :model do
   it "User validates presence of email" do
     expect(@user1).to validate_presence_of(:email)
   end
-  
+
+  it "User validates length of email" do
+    expect(@user1).to validate_length_of(:email).is_at_least(1).is_at_most(255).on(:create)
+  end
+
 end

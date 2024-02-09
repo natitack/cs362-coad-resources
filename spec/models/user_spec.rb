@@ -22,4 +22,9 @@ RSpec.describe User, type: :model do
   # Association tests
   it {should belong_to(:organization)}
 
+  # Validation tests
+  it "User validates presence of email" do
+    expect(@user1).to validate_presence_of(:email)
+  end
+  
 end

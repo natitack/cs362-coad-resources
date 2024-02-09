@@ -35,5 +35,8 @@ RSpec.describe User, type: :model do
   it "User validates presence of password" do
     expect(@user1).to validate_presence_of(:password)
   end
+  it "User validates length of password" do
+    expect(@user1).to validate_length_of(:password).is_at_least(7).is_at_most(255).on(:create)
+  end
 
 end

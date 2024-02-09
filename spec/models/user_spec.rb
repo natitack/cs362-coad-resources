@@ -32,6 +32,8 @@ RSpec.describe User, type: :model do
   it "User validates email format" do
     expect(@user1).to validate_uniqueness_of(:email).case_insensitive
   end
-
+  it "User validates presence of password" do
+    expect(@user1).to validate_presence_of(:password)
+  end
 
 end

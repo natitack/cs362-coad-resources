@@ -46,5 +46,8 @@ RSpec.describe User, type: :model do
     result = user.to_s
     expect(result).to eq(email)
   end
+  it "User can set role to organization" do
+    expect(@user1.role).to eq("organization")
+  end
 
 end

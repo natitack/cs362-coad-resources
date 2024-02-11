@@ -39,4 +39,12 @@ RSpec.describe User, type: :model do
     expect(@user1).to validate_length_of(:password).is_at_least(7).is_at_most(255).on(:create)
   end
 
+  # Member Functions tests
+  it "User has a string representing its email" do
+    email = 'test@test.test'
+    user = User.new(email: email)
+    result = user.to_s
+    expect(result).to eq(email)
+  end
+
 end

@@ -12,4 +12,17 @@ require 'rails_helper'
 # end
 RSpec.describe DashboardHelper, type: :helper do
 
+  context "organization approved" do
+    #let(:user) { build(:user, :organization_approved) }
+    let(:user) { instance_double('User',
+      admin?: false,
+      organization: Organization.new(status: :approved)) }
+
+    describe "gets the organization_approved dashboard" do
+      it {
+        expect(helper.dashboard_for(user)).to eq 'organization_approved_dashboard'
+      }
+    end
+  end
+
 end

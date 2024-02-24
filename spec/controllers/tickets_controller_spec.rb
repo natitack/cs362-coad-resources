@@ -75,6 +75,67 @@ RSpec.describe TicketsController, type: :controller do
     end
 end
 
+#tests for capture
+RSpec.describe TicketsController, type: :controller do
+    describe "PATCH #capture" do
+        context "as a logged out user" do
+            it "redirects to dashboard" do
+                ticket = create(:ticket)
+                patch :capture, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+        context "as a logged in orginization approved user" do
+            it "redirects to dashboard #tickets:open" do
+                user = create(:user, :organization_approved)
+                sign_in(user)
+                ticket = create(:ticket, :organization_id => nil) #ticket has to have nil organization ID in order to be captured
+                patch :capture, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:open')
+            end
+        end
+        context "unable to capture ticket" do
+            it "as a logged in orginization approved user that cannot capture the ticket" do
+                user = create(:user, :organization_approved)
+                sign_in(user)
+                ticket = create(:ticket, ) #ticket has to have an organization ID in order to not be captured
+                patch :capture, params: { id: ticket.id }
+                expect(response).to be_successful
+            end
+        end
+    end
+end
+
+# tests for release
+RSpec.describe TicketsController, type: :controller do
+    describe "PATCH #release" do
+        context "as a logged out user" do
+            it "redirects to dashboard" do
+                ticket = create(:ticket)
+                patch :release, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+        context "as a logged in admin user" do
+            it "redirects to dashboard #tickets:captured" do
+                user = create(:user, :admin)
+                sign_in(user)
+                ticket = create(:ticket)
+                patch :release, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:captured')
+            end
+        end
+        context "as a logged in orginization approved user" do
+            it "redirects to dashboard #tickets:organization" do
+                user = create(:user, :organization_approved)
+                sign_in(user)
+                ticket = create(:ticket, :organization_id => user.organization.id)
+                patch :release, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path << '#tickets:organization')
+            end
+        end
+    end
+end
 
 # tests for close
 RSpec.describe TicketsController, type: :controller do
@@ -116,4 +177,24 @@ RSpec.describe TicketsController, type: :controller do
 
     end
 
+end
+
+# tests for destroy
+RSpec.describe TicketsController, type: :controller do
+    describe "DELETE #destroy" do
+        it "Admin can delete a ticket" do
+            user = create(:user, :admin)
+            sign_in(user)
+            ticket = create(:ticket)
+            delete :destroy, params: { id: ticket.id }
+            expect(response).to redirect_to(dashboard_path << '#tickets')
+        end
+        it "other users cannot delete a ticket" do
+            user = create(:user, :organization_approved)
+            sign_in(user)
+            ticket = create(:ticket)
+            delete :destroy, params: { id: ticket.id }
+            expect(response).not_to be_successful
+        end
+    end
 end

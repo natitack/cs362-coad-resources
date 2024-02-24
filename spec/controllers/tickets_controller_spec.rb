@@ -16,8 +16,6 @@ end
 require 'rails_helper'
 
 RSpec.describe TicketsController, type: :controller do
-    require 'rails_helper'
-
     describe "POST #create" do
         context "creates a ticket with valid attributes" do
             it "creates a valid ticket " do
@@ -46,7 +44,36 @@ RSpec.describe TicketsController, type: :controller do
     end
 end
 
-
+# tests for show
+RSpec.describe TicketsController, type: :controller do
+    describe "GET #show" do
+        context "as a logged out user" do
+            it "redirects to dashboard" do
+                ticket = create(:ticket)
+                get :show, params: { id: ticket.id }
+                expect(response).to redirect_to(dashboard_path)
+            end
+        end
+        context "as a logged in orginization approved user" do
+            it "returns a ticket" do
+                user = create(:user, :organization_approved)
+                sign_in(user)
+                ticket = create(:ticket, :organization_id => user.organization.id)
+                get :show, params: { id: ticket.id }
+                expect(response).to be_successful # does not completely validate that the ticket returned is the correct ticket, but I don't want to add the gem that gives us the assigns() method to the gemfile
+            end
+        end
+        context "as an admin" do
+            it "returns a ticket" do
+                user = create(:user, :admin)
+                sign_in(user)
+                ticket = create(:ticket)
+                get :show, params: { id: ticket.id }
+                expect(response).to be_successful
+            end
+        end
+    end
+end
 
 
 # tests for close

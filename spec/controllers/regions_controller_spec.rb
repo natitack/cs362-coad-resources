@@ -26,3 +26,15 @@ RSpec.describe RegionsController, type: :controller do
   end
 
 end
+
+# rest of create tests done as I know how to do them
+
+RSpec.describe RegionsController, type: :controller do
+  context "throws an error if region is not named" do
+    it "fails to create region" do
+      region = build(:region, :name => nil)
+      expect(region).not_to be_valid
+    end
+  end
+
+end

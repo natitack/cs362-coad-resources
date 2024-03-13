@@ -1,4 +1,20 @@
 require 'rails_helper'
+# double / mock test 
+RSpec.describe ResourceCategoriesController, type: :controller do
+  
+    describe '#activate' do
+      it 'redirects to resource_category with an alert' do
+        user = create(:user, :admin)
+        sign_in(user)
+        resource_category = create(:resource_category)
+        allow_any_instance_of(ResourceCategory).to receive(:activate).and_return(false)
+
+        patch :activate, params: { id: resource_category.id }
+        expect(response).to redirect_to(resource_category)
+        expect(flash[:alert]).to eq('There was a problem activating the category.')
+      end
+    end
+  end
 
 RSpec.describe ResourceCategoriesController, type: :controller do
     #test for new
@@ -79,6 +95,7 @@ RSpec.describe ResourceCategoriesController, type: :controller do
                 expect(response).to redirect_to(resource_category)
             end
         end
+
     end
         # tests for deactivate
     describe "PATCH #deactivate" do

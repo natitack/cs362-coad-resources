@@ -14,6 +14,19 @@ RSpec.describe ResourceCategoriesController, type: :controller do
         expect(flash[:alert]).to eq('There was a problem activating the category.')
       end
     end
+    describe '#deactivate' do
+      it 'redirects to resource_category with an alert' do
+        user = create(:user, :admin)
+        sign_in(user)
+        resource_category = create(:resource_category)
+        allow_any_instance_of(ResourceCategory).to receive(:deactivate).and_return(false)
+
+        patch :deactivate, params: { id: resource_category.id }
+        expect(response).to redirect_to(resource_category)
+        expect(flash[:alert]).to eq('There was a problem deactivating the category.')
+      end
+    end
+
   end
 
 RSpec.describe ResourceCategoriesController, type: :controller do

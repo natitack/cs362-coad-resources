@@ -2,22 +2,18 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a Ticket', type: :feature do
   before do
-    # user input part
-    # @region = Region.create(name: 'Bend')
     @region = create(:region)
     @resource_category = create(:resource_category)
   end
 
   # go to root path, click on get help, fill in the form, click on submit
-  it 'can be created from the home screen' do
-    # User Input Part
+  it 'can be created' do
 
     visit root_path
     click_on 'Get Help'
     fill_in 'Full Name', with: 'Chris Example'
     fill_in 'Phone Number', with: '555-555-1212'
 
-    #select "Bend", from: 'Region'
     select @region.name, from: 'Region'
     select @resource_category.name, from: 'Resource Category'
 
@@ -25,7 +21,6 @@ RSpec.describe 'Creating a Ticket', type: :feature do
 
     click_on 'Send this help request'
 
-    # Test Response part
     expect(current_path).to eq ticket_submitted_path
   end
 end
